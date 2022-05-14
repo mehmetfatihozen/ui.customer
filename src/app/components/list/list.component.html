@@ -1,0 +1,37 @@
+<div class="list-bg-color">
+  <div class="container pt-4">
+    <div class="row">
+      <div class="col-4 mb-4" *ngFor='let campaign of customerCampaignList'>
+        <div class="campaign-box">
+          <div class="c-box top-box"
+               [ngStyle]="{'background': 'url(' + campaign.campaign.campaignListImageUrl + ') no-repeat center'}">
+            <div class="row">
+              <div class="col left-icon">
+                <i [ngClass]="campaign.isJoin ? 'bi-star-fill' : 'bi-star'">
+                </i>
+              </div>
+              <div class="col right-icon">
+                <i class="c-pointer" [ngClass]="campaign.isFavorite ? 'bi-heart-fill' : 'bi-heart'"
+                   (click)="setCampaignFavoriteState(campaign)">
+                </i>
+              </div>
+            </div>
+          </div>
+          <div class="c-box bottom-box">
+            <div class="row title">
+              {{campaign.campaign.titleTr}}
+            </div>
+            <div class="row">
+              <div class="col-6 join-button">
+                <a
+                  [routerLink]="campaign.isJoin ? '/campaigns/detail/'+campaign.campaignId : '../join/'+campaign.campaignId+'/approve'">
+                  {{expirePage || campaign.isJoin ? "GÖRÜNTÜLE" : "HEMEN KATIL"}}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

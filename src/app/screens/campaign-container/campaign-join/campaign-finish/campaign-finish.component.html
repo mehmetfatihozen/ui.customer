@@ -1,0 +1,21 @@
+<app-main-content blockTitle="{{campaign.name}}">
+  <div class="container">
+    <div class="col-6 mx-auto p-5 d-flex align-items-center flex-column">
+      <img class="mb-4" src="/assets/img/congratulations.png">
+      <h3 class="my-1">Tebrikler!</h3>
+      <h4 class="my-1 text-center">{{campaign.name}} dahil oldunuz!</h4>
+      <div class="row mt-4">
+        <div class="col d-flex align-items-center flex-column">
+          <a [routerLink]="'/campaigns/detail/'+campaign.id"
+             class="btn btn-primary px-5 mt-3 w-100">
+            Kampanyaya Git
+          </a>
+          <a [routerLink]="['/campaigns/list']"
+             class="btn btn-outline-primary px-5 mt-3 w-100">
+            Ana Sayfaya Dön
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-main-content>

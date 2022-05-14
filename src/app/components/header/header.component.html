@@ -1,0 +1,47 @@
+<div class="header">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container position-relative">
+            <div class="logo navbar-brand">
+                <a [routerLink]="['']">
+                    <img src="/assets/img/logo-sm.png" alt="Burgan Bank">
+                </a>
+            </div>
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a [routerLink]="['campaigns/list']"  class="nav-link" routerLinkActive="active">
+                            KAMPANYALAR
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="['campaigns/i-joined']" class="nav-link" routerLinkActive="active">
+                            KATILDIKLARIM
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="['campaigns/my-favorite']" class="nav-link" routerLinkActive="active">
+                            <i class="bi bi-heart"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="['campaigns/expire']" class="nav-link" routerLinkActive="active">
+                            SÜRESİ GEÇENLER
+                        </a>
+                    </li>
+                </ul>
+                <div class="sign-out">
+                    <a [routerLink]="['/login']">
+                        <img src="/assets/img/sign-out.png" alt="Çıkış Yap">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>

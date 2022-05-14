@@ -1,0 +1,137 @@
+<app-main-content blockTitle="{{campaignName}}">
+  <div class="container d-flex">
+    <div class="preview-container mt-5">
+      <div class="row">
+        <div class="col">
+          <div class="custom-box total">
+            <img class="p-3" src="/assets/img/custom-star.png">
+            <div>
+              <div class="currency-style">{{totalAchievementStr}} {{totalAchievementCurrencyCode}}</div>
+              <div class="title-style">TOPLAM KAZANIM</div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="custom-box last">
+            <img class="p-3" src="/assets/img/calendar.png">
+            <div>
+              <div class="currency-style">{{previousMonthAchievementStr}} {{previousMonthAchievementCurrencyCode}}</div>
+              <div class="title-style">GEÇEN AY KAZANIM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col">
+          <div class="congrl" *ngIf="isAchieved">
+            <i class="bi bi-emoji-smile pe-2 text-blue"></i>Tebrikler, harcama hedefini tutturduğunuz için
+            kazandığınız {{campaignName}} avantajları:
+            <ul>
+              <li *ngFor="let achievement of campaignAchievementList; let i = index">{{achievement.descriptionTr}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <h4 class="row mt-4 ms-4 text-purple-dark">Dönem İçi İşlemleriniz</h4>
+      <h5 class="row mt-2 ms-4 text-black" *ngIf="!isAchieved">
+        Kampanyadan yararlanmak için {{endDate}} tarihine kadar aşağıdaki koşullardan en az birini
+        tamamlamalısınız.
+      </h5>
+      <div class="row mt-2">
+        <div *ngFor="let targetGroup of targetGroupList; let i = index">
+          <div class="col box my-3">
+            <div class="row target-content">
+              <div class="col-3" *ngFor='let target of targetListMap(targetGroup.targetList, 2); let j = index'>
+                <div class="row">
+                  <div class="col-auto p-0">
+                    <div class="bi bi-square-fill" [ngStyle]="{'color': targetColorList[j]}"></div>
+                  </div>
+                  <div class="col">
+                    <div class="row" style="margin-bottom:10px">
+                      <p class="target-title">
+                        {{target.title}}
+                      </p>
+                      <!--<p class="target-desc">-->
+                      <!--{{target.descriptionTr}}-->
+                      <!--</p>-->
+                      <angular-editor [config]="editorConfig" class="detail-angular-editor"
+                                      [ngModel]="target.descriptionTr">
+                      </angular-editor>
+                    </div>
+                    <div class="spent">{{target.usedAmountStr}} {{target.usedAmountCurrencyCode}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row target-content">
+              <div class="col-3" *ngFor='let target of targetListMap(targetGroup.targetList, 1); let j = index'>
+                <div class="row">
+                  <div class="col-auto p-0">
+                    <div class="bi bi-square-fill" [ngStyle]="{'color': targetColorList[20-j]}"></div>
+                  </div>
+                  <div class="col">
+                    <div class="row" style="margin-bottom:0">
+                      <p class="target-title">
+                        {{target.title}}
+                      </p>
+                      <angular-editor [config]="editorConfig" class="detail-angular-editor"
+                                      [ngModel]="target.descriptionTr">
+                      </angular-editor>
+                    </div>
+                    <div class="progress progress-bar-style">
+                      <div class="progress-bar" role="progressbar"
+                           [ngStyle]="{'width': target.percent+'%'}"></div>
+                    </div>
+                    <div class="spent">{{target.usedAmountStr}} {{target.usedAmountCurrencyCode}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="target-footer" [ngStyle]="{'background-color': i%2 == 0 ? '#676beb' : '#00aeef'}">
+              <div class="row">
+                <div class="col">
+                  Harcama hedefi: {{targetGroup.targetAmountStr}} {{targetGroup.targetAmountCurrencyCode}}
+                </div>
+                <div class="col d-flex justify-content-end">
+                  Kalan harcama tutarı: {{targetGroup.remainAmountStr}} {{targetGroup.targetAmountCurrencyCode}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="targetGroup != targetGroupList[targetGroupList.length-1]">
+            <strong class="text-purple">VEYA</strong>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-4" *ngFor="let achievement of campaignAchievementList">
+          <div class="box achievement-box"
+               [ngClass]="{'achievement-cong-div':isAchieved}">
+            <p class="achievement-title">
+              {{achievement.titleTr}}
+            </p>
+            <div class="row" *ngIf="isAchieved">
+              <div class="col-6">Aylık Toplam Harcama</div>
+              <div class="col-6 spent">{{usedAmountStr}} {{usedAmountCurrencyCode}}</div>
+            </div>
+            <hr *ngIf="isAchieved">
+            <p class="col-8 achievement-desc">
+              {{achievement.descriptionTr}}
+            </p>
+            <div class="row" *ngIf="isAchieved">
+              <div class="col-6">Kazancınız</div>
+              <div class="col-6 gain">{{achievement.amountStr}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-6 mx-auto d-flex justify-content-center">
+          <button class="btn btn-leave" (click)="leave()">
+            Programdan Ayrıl
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-main-content>
